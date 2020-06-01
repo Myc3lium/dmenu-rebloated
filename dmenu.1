@@ -4,6 +4,9 @@ dmenu \- dynamic menu
 .SH SYNOPSIS
 .B dmenu
 .RB [ \-bfiv ]
+.\" patch fuzzymatch
+.RB [ \-F ]
+.\" patch END
 .RB [ \-l
 .IR lines ]
 .RB [ \-m
@@ -22,6 +25,14 @@ dmenu \- dynamic menu
 .IR color ]
 .RB [ \-w
 .IR windowid ]
+.\" patch border
+.RB [ \-bw
+.IR border\ width ]
+.\" patch END
+.\" patch lineheight
+.RB [ \-h
+.IR line\ height ]
+.\" patch END
 .P
 .BR dmenu_run " ..."
 .SH DESCRIPTION
@@ -80,6 +91,21 @@ prints version information to stdout, then exits.
 .TP
 .BI \-w " windowid"
 embed into windowid.
+.\" patch border
+.TP
+.BI \-bw " border width"
+defines the width of the border to use when drawing dmenu's window.
+.\" patch END
+.\" patch lineheight
+.TP
+.BI \-h " height"
+defines the height in pixels of each entry line to use.
+.\" patch END
+.\" patch fuzzymatch
+.TP
+.B \-F 
+Toggles the fuzzy-searching flag in config.h. If fuzzy match is on by default, this turns it off and vice versa.
+.\" patch END
 .SH USAGE
 dmenu is completely controlled by the keyboard.  Items are selected using the
 arrow keys, page up, page down, home, and end.

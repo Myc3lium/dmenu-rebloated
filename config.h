@@ -10,11 +10,14 @@ static const char *prompt      = NULL;      /* -p  option; prompt to the left of
 static const char *colors[SchemeLast][2] = {
 	/*     fg         bg       */
 	[SchemeNorm] = { "#bbbbbb", "#222222" },
-	[SchemeSel] = { "#eeeeee", "#005577" },
-	[SchemeOut] = { "#000000", "#00ffff" },
+	[SchemeSel]  = { "#eeeeee", "#005577" },
+	[SchemeOut]  = { "#000000", "#00ffff" },
 };
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
 static unsigned int lines      = 0;
+// patch lineheight
+static unsigned int lineheight = 0;
+// patch END
 
 /*
  * Characters not considered part of a word while deleting words
@@ -23,10 +26,18 @@ static unsigned int lines      = 0;
 static const char worddelimiters[] = " ";
 
 // patch border
-static unsigned int border_width = 2;
+static unsigned int border_width = 1;
 // patch END
 
 // patch symbols
-static const char *symbol_left  = "<";
-static const char *symbol_right = ">";
+static const char *symbol_left  = "←";
+static const char *symbol_right = "→";
+// patch END
+
+// patch fuzzymatch
+static int fuzzy = 1;
+// patch END
+
+// patch numbers
+static int display_number = 1;
 // patch END
