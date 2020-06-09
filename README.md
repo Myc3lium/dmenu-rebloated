@@ -26,35 +26,18 @@ See the man page for details.
 PS
 ----
 This is my personal fork of dmenu, which includes lot of patches which serve to
-make it easier to use or more versatile. These patches have also been reworked
-into `ifdef` clauses in order to make them more modular and where possible
-co-compatible.
+make it easier to use or more versatile. 
 
-The list of patches enabled by default include:
+The list of patches include:
 
-| Implemented | Patch/functionality            | Flag              |
-| ----------- | ------------------------------ | ----------------- |
-| ✓           | Border                         | `-DBORDERWIDTH`   |
-| ✓           | Line height                    | `-DLINEHEIGHT`    |
-| ✓           | Mouse support                  | `-DMOUSESUPPORT`  |
-| ✓           | Symbols                        | `-DSYMBOLS`       |
-| ✓           | Vertical full width            | `-DVERTFULL`      |
-| ✓           | Fuzzy match                    | `-DFUZZYMATCHING` |
-| ✓           | Highlight                      | `-DHIGHLIGHT`     |
-| ✓           | Numbers (current match count)  | `-DMATCHCOUNT`    |
-| ✓           | Width, x and y positions       | `-DXYZ`           |
-
-If you want more advanced features like the ones below, append the appropriate
-flag to the `FANCYFLAGS` variable in `config.mk`.
-
-| Implemented | Patch/functionality  | Flag                |
-| ----------- | -------------------- | ------------------- |
-|             | Fuzzy highlight      |  `-DFUZZYHIGHLIGHT` |
-|             | High priority        |  `-DPRIORITY`       |
-|             | Password             |  `-DPASSWORD`       |
-|             | More color           |  `-DCOLORS`         |
-|             | Dynamic options      |  `-DDYNAMICOPTIONS` |
-|             | Text scrolling       |  `-DTEXTSCROLL`     |
-|             | Non blocking 'stdin' | `-DNONBLOCKING`     |
-
-
+| Implemented | Patch/functionality            |
+| ----------- | ------------------------------ |
+| ✓           | Border                         |
+| ✓           | Line height                    |
+| ✓           | Mouse support                  |
+| ✓           | Symbols                        |
+| ✓           | Vertical full width            |
+| ✓           | Fuzzy match                    |
+| ✓           | Highlight                      |
+| ✓           | Numbers (current match count)  |
+| ✓           | Width, x and y positions       |
