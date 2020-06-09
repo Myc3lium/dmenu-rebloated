@@ -34,7 +34,10 @@
 // patch END
 
 /* enums */
-enum { SchemeNorm, SchemeSel, SchemeOut, SchemeLast }; /* color schemes */
+// patch highlight
+//enum { SchemeNorm, SchemeSel, SchemeOut, SchemeLast }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeOut, SchemeNormHighlight, SchemeSelHighlight, SchemeLast }; /* color schemes */
+// patch END
 
 struct item {
 	char *text;
@@ -130,6 +133,44 @@ cistrstr(const char *s, const char *sub)
 	return NULL;
 }
 
+// patch highlight
+static void
+drawhighlights(struct item *item, int x, int y, int maxw)
+{
+    char restorechar, tokens[sizeof text], *highlight,  *token;
+    int indentx, highlightlen;
+
+    drw_setscheme(drw, scheme[item == sel ? SchemeSelHighlight : SchemeNormHighlight]);
+    strcpy(tokens, text);
+    for (token = strtok(tokens, " "); token; token = strtok(NULL, " ")) {
+        highlight = fstrstr(item->text, token);
+        while (highlight) {
+            // Move item str end, calc width for highlight indent, & restore
+            highlightlen = highlight - item->text;
+            restorechar = *highlight;
+            item->text[highlightlen] = '\0';
+            indentx = TEXTW(item->text);
+            item->text[highlightlen] = restorechar;
+
+            // Move highlight str end, draw highlight, & restore
+            restorechar = highlight[strlen(token)];
+            highlight[strlen(token)] = '\0';
+            drw_text(
+                drw,
+                x + indentx - (lrpad / 2) - 1,
+                y,
+                MIN(maxw - indentx, TEXTW(highlight) - lrpad),
+                bh, 0, highlight, 0
+            );
+            highlight[strlen(token)] = restorechar;
+
+            if (strlen(highlight) - strlen(token) < strlen(token)) break;
+            highlight = fstrstr(highlight + strlen(token), token);
+        }
+    }
+}
+// patch END
+
 static int
 drawitem(struct item *item, int x, int y, int w)
 {
@@ -140,7 +181,13 @@ drawitem(struct item *item, int x, int y, int w)
 	else
 		drw_setscheme(drw, scheme[SchemeNorm]);
 
-	return drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
+    // patch highlight
+	// return drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
+	int r = drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
+    if (highlight)
+        drawhighlights(item, x, y, w);
+    return r;
+    // patch END
 }
 
 
@@ -898,8 +945,11 @@ setup(void)
 
 	/* calculate menu geometry */
 	bh = drw->fonts->h + 2;
-    // patch lineheigh
+    // patch lineheight
     bh = MAX(bh, lineheight);
+    // patch END
+    // patch xyz
+    dmw *= (drw ->fonts ->h);
     // patch END
 	lines = MAX(lines, 0);
 	mh = (lines + 1) * bh;
@@ -929,9 +979,14 @@ setup(void)
 				if (INTERSECT(x, y, 1, 1, info[i]))
 					break;
 
-		x = info[i].x_org;
-		y = info[i].y_org + (topbar ? 0 : info[i].height - mh);
-		mw = info[i].width;
+        // patch xyz
+		// x = info[i].x_org;
+		// y = info[i].y_org + (topbar ? 0 : info[i].height - mh);
+		// mw = info[i].width;
+        x = info[i].x_org + dmx;
+        y = info[i].y_org + (topbar ? dmy : info[i].height - mh - dmy);
+        mw = (dmw>0 ? dmw : info[i].width);
+        // patch END
 		XFree(info);
 	} else
 #endif
@@ -939,9 +994,14 @@ setup(void)
 		if (!XGetWindowAttributes(dpy, parentwin, &wa))
 			die("could not get embedding window attributes: 0x%lx",
 			    parentwin);
-		x = 0;
-		y = topbar ? 0 : wa.height - mh;
-		mw = wa.width;
+        // patch xyz
+		// x = 0;
+		// y = topbar ? 0 : wa.height - mh;
+		// mw = wa.width;
+        x = dmx;
+        y = topbar ? dmy : wa.height - mh - dmy;
+        mw = (dmw>0 ? dmw : wa.width);
+        // patch END
 	}
 	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
 	inputw = MIN(inputw, mw/3);
@@ -1019,6 +1079,14 @@ main(int argc, char *argv[])
         } else if (!strcmp(argv[i], "-F")) {
             fuzzy = ~fuzzy;
         // patch END
+        // patch numbers
+        } else if (!strcmp(argv[i], "-n")) {
+            display_number = ~display_number;
+        // patch END
+        // patch highlight
+        } else if (!strcmp(argv[i], "-hi")) {
+            highlight = ~highlight;
+        // patch END
 		} else if (i + 1 == argc)
 			usage();
 		/* these options take one argument */
@@ -1049,6 +1117,14 @@ main(int argc, char *argv[])
             lineheight = atoi (argv [++i]);
             lineheight = MAX(lineheight, 8);
         }
+        // patch END
+        // patch xyz
+        else if (!strcmp(argv[i], "-x"))   /* window x offset */
+            dmx = atoi(argv[++i]);
+        else if (!strcmp(argv[i], "-y"))   /* window y offset (from bottom up if -b) */
+            dmy = atoi(argv[++i]);
+        else if (!strcmp(argv[i], "-wd"))   /* make dmenu this wide */
+            dmw = atoi(argv[++i]);
         // patch END
 		else
 			usage();

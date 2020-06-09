@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/home/myc3lium/Templates/github.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="dmenu---dynamic-menu">dmenu - dynamic menu</h1>
+<p>dmenu is an efficient dynamic menu for X.</p>
+<h2 id="requirements">Requirements</h2>
+<p>In order to build dmenu you need the Xlib header files.</p>
+<h2 id="installation">Installation</h2>
+<p>Edit config.mk to match your local setup (dmenu is installed into<br />
+the /usr/local namespace by default).</p>
+<p>Afterwards enter the following command to build and install dmenu<br />
+(if necessary as root):</p>
+<pre><code>make clean install</code></pre>
+<h2 id="running-dmenu">Running dmenu</h2>
+<p>See the man page for details.</p>
+<h2 id="ps">PS</h2>
+<p>This is my personal fork of dmenu, which includes lot of patches which serve to<br />
+make it easier to use or more versatile. These patches have also been reworked<br />
+into <code>ifdef</code> clauses in order to make them more modular and where possible<br />
+co-compatible.</p>
+<p>The list of patches enabled by default include:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Implemented</th>
+<th style="text-align: left;">Patch/functionality</th>
+<th style="text-align: left;">Flag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">Border</td>
+<td style="text-align: left;"><code>-DBORDERWIDTH</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">Line height</td>
+<td style="text-align: left;"><code>-DLINEHEIGHT</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">Mouse support</td>
+<td style="text-align: left;"><code>-DMOUSESUPPORT</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">Symbols</td>
+<td style="text-align: left;"><code>-DSYMBOLS</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">Vertical full width</td>
+<td style="text-align: left;"><code>-DVERTFULL</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Fuzzy match</td>
+<td style="text-align: left;"><code>-DFUZZYMATCHING</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Numbers (current match count)</td>
+<td style="text-align: left;"><code>-DMATCHCOUNT</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Non blocking 'stdin'</td>
+<td style="text-align: left;"><code>-DNONBLOCKING</code></td>
+</tr>
+</tbody>
+</table>
+<p>If you want more advanced features like the ones below, append the appropriate<br />
+flag to the <code>FANCYFLAGS</code> variable in <code>config.mk</code>.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Implemented</th>
+<th style="text-align: left;">Patch/functionality</th>
+<th style="text-align: left;">Flag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Fuzzy highlight</td>
+<td style="text-align: left;"><code>-DFUZZYHIGHLIGHT</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Highlight</td>
+<td style="text-align: left;"><code>-DHIGHLIGHT</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">High priority</td>
+<td style="text-align: left;"><code>-DPRIORITY</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Password</td>
+<td style="text-align: left;"><code>-DPASSWORD</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">More color</td>
+<td style="text-align: left;"><code>-DCOLORS</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Dynamic options</td>
+<td style="text-align: left;"><code>-DDYNAMICOPTIONS</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Text scrolling</td>
+<td style="text-align: left;"><code>-DTEXTSCROLL</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -40,20 +40,21 @@ The list of patches enabled by default include:
 | ✓           | Symbols                        | `-DSYMBOLS`       |
 | ✓           | Vertical full width            | `-DVERTFULL`      |
 | ✓           | Fuzzy match                    | `-DFUZZYMATCHING` |
-|             | Numbers (current match count)  | `-DMATCHCOUNT`    |
-|             | Non blocking 'stdin'           | `-DNONBLOCKING`   |
+| ✓           | Highlight                      | `-DHIGHLIGHT`     |
+| ✓           | Numbers (current match count)  | `-DMATCHCOUNT`    |
+| ✓           | Width, x and y positions       | `-DXYZ`           |
 
 If you want more advanced features like the ones below, append the appropriate
 flag to the `FANCYFLAGS` variable in `config.mk`.
 
-| Implemented | Patch/functionality | Flag                |
-| ----------- | ------------------- | ------------------- |
-|             | Fuzzy highlight     |  `-DFUZZYHIGHLIGHT` |
-|             | Highlight           |  `-DHIGHLIGHT`      |
-|             | High priority       |  `-DPRIORITY`       |
-|             | Password            |  `-DPASSWORD`       |
-|             | More color          |  `-DCOLORS`         |
-|             | Dynamic options     |  `-DDYNAMICOPTIONS` |
-|             | Text scrolling      |  `-DTEXTSCROLL`     |
+| Implemented | Patch/functionality  | Flag                |
+| ----------- | -------------------- | ------------------- |
+|             | Fuzzy highlight      |  `-DFUZZYHIGHLIGHT` |
+|             | High priority        |  `-DPRIORITY`       |
+|             | Password             |  `-DPASSWORD`       |
+|             | More color           |  `-DCOLORS`         |
+|             | Dynamic options      |  `-DDYNAMICOPTIONS` |
+|             | Text scrolling       |  `-DTEXTSCROLL`     |
+|             | Non blocking 'stdin' | `-DNONBLOCKING`     |
 
 
