@@ -6,3 +6,4 @@
 "             [-S (toggle numbers)]                   \n"
 "             [-hi (toggle highlight)]                \n"
 "             [-wd width] [-x x coord] [-y y coord]   \n"
+"             [-it text]                              \n"

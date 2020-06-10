@@ -1126,6 +1126,12 @@ main(int argc, char *argv[])
         else if (!strcmp(argv[i], "-wd"))   /* make dmenu this wide */
             dmw = atoi(argv[++i]);
         // patch END
+        // patch initialtext
+        else if (!strcmp(argv[i], "-it")) {   /* embedding window id */
+            const char * text = argv[++i];
+            insert(text, strlen(text));
+        }
+        // patch END
 		else
 			usage();
 
