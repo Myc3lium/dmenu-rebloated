@@ -32,6 +32,10 @@ dmenu \- dynamic menu
 .RB [ \-bw
 .IR border\ width ]
 .\" patch END
+.\" patch initialtext
+.RB [ \-it
+.IR text ]
+.\" patch END
 .\" patch lineheight
 .RB [ \-h
 .IR line\ height ]
@@ -106,6 +110,11 @@ embed into windowid.
 .TP
 .BI \-bw " border width"
 defines the width of the border to use when drawing dmenu's window.
+.\" patch END
+.\" patch initialtext
+.TP
+.BI \-it " text"
+define text which will be used as an initial search term.
 .\" patch END
 .\" patch lineheight
 .TP
